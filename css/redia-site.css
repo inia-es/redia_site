@@ -1,1 +1,9 @@
 body { padding-bottom: 70px; }
+
+.navbar-inverse {
+  background-color: #264;
+}
+
+.navbar-inverse .navbar-nav > .active > a{
+  background-color: #141;
+}
