@@ -12,3 +12,7 @@ body { padding-bottom: 70px; }
   background-color: rgba(70,110,70,.40);
   border-radius: 25px;
 }
+
+h5 {
+  font-weight: bold;
+}
