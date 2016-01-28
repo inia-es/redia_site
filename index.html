@@ -54,7 +54,7 @@ de Investigación Agroalimentaria">REDIA</abbr></a>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#about">¿Qué es?</a></li>
-                <li ><a href="#contact">Contacto</a></li>
+                <li ><a href="#contact-form">Contacto</a></li>
               </ul>
             </div>
           </div>
@@ -207,6 +207,37 @@ El repositorio servirá como herramienta para valorar, mediante <strong>nuevas m
 
       <!-- /END THE FEATURETTES -->
 
+      <!-- contact form -->
+      <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Sugerencias, ruegos, consultas</h2>
+        <form method="GET" action="mailto:antonio.sanchez@inia.es" id="contact-form" enctype="text/plain">
+          <input type="text" placeholder="Nombre y apellidos" name="name" class="form-control form-group">
+          <input type="email" placeholder="email@inia.es" name="email" class="form-control form-group">
+          <select class="form-control form-group" name="department">
+          <option>INIA</option>
+          <option>CIFOR</option>
+          <option>CISA</option>
+          <option>CRF</option>
+          <option>Biotecnología</option>
+          <option>Medio Ambiente</option>
+          <option>Mejora Genética Animal</option>
+          <option>Protección Vegetal</option>
+          <option>Reproducción Animal</option>
+          <option>Tecnología de los Alimentos</option>
+          <option>DTEVPF</option>
+          <option>CCA Soria</option>
+          <option>Otro: especificar en el texto de la consulta</option>
+          </select>
+          <textarea class="form-control form-group" placeholder="Escriba aquí su duda o propuesta" rows="5" name="text"></textarea>
+
+          <input type="hidden" name="subject" value="Formulario contacto REDIA">
+          <input type="hidden" name="body">
+          <button type="submit" class="btn btn-default form-group">Enviar</button>
+        </form>
+      </div>
+      </div>
+      <!-- /end contact form -->
 
       <!-- FOOTER -->
       <footer>
@@ -251,7 +282,37 @@ El repositorio servirá como herramienta para valorar, mediante <strong>nuevas m
 
     </div><!-- /.container -->
 
+<script>
+   var form = document.getElementById('contact-form');
+   form.addEventListener('submit',contact,false);
+   function contact(e) {
+      // Prevent Default Form Submission
+      e.preventDefault();
 
+      var target = e.target || e.srcElement;
+      var i = 0;
+      var message = '';
+
+      // Loop Through All Input Fields
+      for(i = 0; i < target.length; ++i) {
+         // Check to make sure it's a value. Don't need to include Buttons
+         if(target[i].type != 'text' && target[i].type != 'textarea'
+             && target[i].type != 'select-one') {
+                // Skip to next input since this one doesn't match our rules
+            continue;
+         }
+
+         // Add Input Name and value followed by a line break
+         message += target[i].name + ': ' + target[i].value + "\r\n";
+      }
+      // Modify the hidden body input field that is required for the mailto: scheme
+      target.elements["body"].value = message;
+      console.log(message);
+
+      // Submit the form since we previously stopped it. May cause recursive loop in some browsers? Should research this.
+      this.submit();
+   }
+</script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
